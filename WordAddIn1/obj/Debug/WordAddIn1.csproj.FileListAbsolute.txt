@@ -1,0 +1,12 @@
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.csproj.AssemblyReference.cache
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.Properties.Resources.resources
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.csproj.GenerateResource.cache
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.csproj.CoreCompileInputs.cache
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\bin\Debug\WordAddIn1.dll
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\bin\Debug\WordAddIn1.pdb
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\bin\Debug\WordAddIn1.dll.manifest
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\bin\Debug\WordAddIn1.vsto
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.csproj.Up2Date
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.dll
+C:\Users\Yan\source\repos\WordAddIn1\WordAddIn1\obj\Debug\WordAddIn1.pdb
