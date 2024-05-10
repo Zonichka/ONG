@@ -4,9 +4,10 @@ const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 const urlDev = "https://localhost:3000/";
-const urlProd = "https://word-gpt-filippofinke.vercel.app/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
 
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -27,11 +28,6 @@ module.exports = async (env, options) => {
       clean: true,
     },
     resolve: {
-      fallback: {
-        https: false,
-        stream: false,
-        fs: false,
-      },
       extensions: [".ts", ".tsx", ".html", ".js"],
     },
     module: {
@@ -66,6 +62,7 @@ module.exports = async (env, options) => {
       ],
     },
     plugins: [
+      new NodePolyfillPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -88,7 +85,7 @@ module.exports = async (env, options) => {
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
-        chunks: ["taskpane", "vendor", "polyfills"],
+        chunks: ["polyfill", "vendor", "taskpane"],
       }),
       new HtmlWebpackPlugin({
         filename: "commands.html",
@@ -98,17 +95,23 @@ module.exports = async (env, options) => {
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"],
       }),
+      new webpack.HotModuleReplacementPlugin({
+        multiStep: true,
+      }),
     ],
     devServer: {
       hot: true,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
       server: {
         type: "https",
         options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       },
       port: process.env.npm_package_config_dev_server_port || 3000,
+      proxy: {
+        "^/*": {
+          target: "http://localhost:5000",
+          secure: false,
+        },
+      },
     },
   };
 

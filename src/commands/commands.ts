@@ -3,10 +3,10 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global global, Office, self, window */
+/* global Office */
 
 Office.onReady(() => {
-  // If needed, Office.js is ready to be called
+  // If needed, Office.js is ready to be called.
 });
 
 /**
@@ -21,10 +21,10 @@ function action(event: Office.AddinCommands.Event) {
     persistent: true,
   };
 
-  // Show a notification message
-  Office.context.mailbox.item.notificationMessages.replaceAsync("action", message);
+  // Show a notification message.
+  Office.context.mailbox.item.notificationMessages.replaceAsync("ActionPerformanceNotification", message);
 
-  // Be sure to indicate when the add-in command function is complete
+  // Be sure to indicate when the add-in command function is complete.
   event.completed();
 }
 
@@ -42,3 +42,6 @@ const g = getGlobal() as any;
 
 // The add-in command functions need to be available in global scope
 g.action = action;
+
+// // Register the function with Office.
+// Office.actions.associate("action", action);
