@@ -21,14 +21,14 @@ export default function App() {
   const mainApi = {
     getText({ prompt }) {
       return $api.post<any>("prompt", {
-        prompt,
+        prompt
       });
     },
-    // getToken({ apiKey }) {
-    //   return $api.post<any>("apiKey", {
-    //     apiKey,
-    //   });
-    // },
+    getToken({ apiKey }) {
+      return $api.post<any>("api", {
+        apiKey,
+      });
+    },
   };
 
   // const mainApi = {
@@ -61,7 +61,10 @@ export default function App() {
     localStorage.setItem("apiKey", key);
     setError("");
   };
-  // mainApi.getToken(apiKey);
+
+  React.useEffect(() => {
+    mainApi.getToken({apiKey});
+  }, [apiKey]);
 
   const onClick = async () => {
     setGeneratedText("");
