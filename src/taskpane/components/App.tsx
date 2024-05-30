@@ -18,6 +18,7 @@ export default function App() {
     "http://localhost:5000"
   });
   
+
   const mainApi = {
     getText({ prompt }) {
       return $api.post<any>("prompt", {
@@ -31,18 +32,6 @@ export default function App() {
     },
   };
 
-  // const mainApi = {
-  //   getText({ prompt }) {
-  //       try {
-  //           return $api.post<any>("prompt", {
-  //               prompt,
-  //           });
-  //       } catch (error) {
-  //           console.error(error);
-  //       }
-  //   },
-  // };
-
   React.useEffect(() => {
     const key = localStorage.getItem("apiKey");
     if (key) {
@@ -50,21 +39,29 @@ export default function App() {
     }
   }, []);
 
-  // const client = React.useMemo(() => {
-  //   const gigaChat = new GigaChat(apiKey, true, true, true);
-  //   return gigaChat;
-  // }, [apiKey]);
-  // client.createToken();
 
   const saveApiKey = (key) => {
+    const existingKey = localStorage.getItem('apiKey');
+    console.log(existingKey);
     setApiKey(key);
-    localStorage.setItem("apiKey", key);
-    setError("");
+    localStorage.setItem('apiKey', key);
+    if (!existingKey || existingKey !== key) {
+      mainApi.getToken({ apiKey: key }).then(() => {
+        setError("");
+      }).catch((e) => {
+        console.error(e);
+        setApiKey("");
+        localStorage.removeItem("apiKey");
+        setError("Не удалось получить токен из API, попробуйте снова");
+      });
+    } else {
+      setApiKey(key);
+      localStorage.setItem("apiKey", key);
+      setError("");
+      mainApi.getToken({ apiKey: key });
+    }
   };
 
-  React.useEffect(() => {
-    mainApi.getToken({apiKey});
-  }, [apiKey]);
 
   const onClick = async () => {
     setGeneratedText("");
@@ -80,39 +77,55 @@ export default function App() {
     setLoading(false);
   };
 
-  // // Remove onInsert and onCopy functions as they are not defined
-  // try {
-  //   await OneNote.run(async (context) => {
-
-  //       // Get the current page.
-  //       const page = context.application.getActivePage();
-
-  //       // Queue a command to set the page title.
-  //       page.title = "Hello World";
-
-  //       // Queue a command to add an outline to the page.
-  //       const html = "<p><ol><li>Item #1</li><li>Item #2</li></ol></p>";
-  //       page.addOutline(40, 90, html);
-
 
   const onInsert = async () => {
-    await OneNote.run(async (context) => {
-      const page = context.application.getActivePage();
-      const pageContents = page.contents;
-      context.load(pageContents);
-      await context.sync();
-      if (pageContents.items.length != 0 && pageContents.items[0].type == "Outline")
-        {
-            const outline = pageContents.items[0].outline;
-            outline.appendRichText(generatedText);
-            await context.sync();
-        }
-    });
+    Office.context.document.getSelectedDataAsync(
+      Office.CoercionType.Text,
+      function (asyncResult) {
+        const error = asyncResult.error;
+        if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+          console.log(error.message);
+        } else {
+          Office.context.document.setSelectedDataAsync(generatedText, { coercionType: Office.CoercionType.Text }, function (asyncResult) {
+            const error = asyncResult.error;
+            if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+              console.log(error.message);
+            }
+          });
+        };
+      }
+    )
   };
 
-  const onCopy = async () => {
-    navigator.clipboard.writeText(generatedText);
+
+  const copyToClipboard = (text) => {
+    const el = document.createElement("textarea");
+    el.value = text;
+    el.setAttribute("readonly", "");
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
+    document.body.appendChild(el);
+  
+    const selected =
+      document.getSelection().rangeCount > 0
+        ? document.getSelection().getRangeAt(0)
+        : false;
+    
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  
+    if (selected) {
+      document.getSelection().removeAllRanges();
+      document.getSelection().addRange(selected);
+    }
   };
+  
+  const onCopy = () => {
+    copyToClipboard(generatedText);
+  };
+
+
   return (
     <Container>
       {apiKey ? (
@@ -129,7 +142,6 @@ export default function App() {
             rows={5}
             multiline={true}
             onChange={(_, newValue: string) => setPrompt(newValue || "")}
-            //styles={{ fieldGroup: { borderRadius: "20px" } }}
           ></TextField>
           <Center
             style={{
@@ -180,50 +192,3 @@ export default function App() {
     </Container>
   );
 }
-
-// import * as React from "react";
-// import Header from "./Header";
-// import HeroList, { HeroListItem } from "./HeroList";
-// import TextInsertion from "./TextInsertion";
-// import { makeStyles } from "@fluentui/react-components";
-// import { Ribbon24Regular, LockOpen24Regular, DesignIdeas24Regular } from "@fluentui/react-icons";
-
-// interface AppProps {
-//   title: string;
-// }
-
-// const useStyles = makeStyles({
-//   root: {
-//     minHeight: "100vh",
-//   },
-// });
-
-// const App = (props: AppProps) => {
-//   const styles = useStyles();
-//   // The list items are static and won't change at runtime,
-//   // so this should be an ordinary const, not a part of state.
-//   const listItems: HeroListItem[] = [
-//     {
-//       icon: <Ribbon24Regular />,
-//       primaryText: "Achieve more with Office integration",
-//     },
-//     {
-//       icon: <LockOpen24Regular />,
-//       primaryText: "Unlock features and functionality",
-//     },
-//     {
-//       icon: <DesignIdeas24Regular />,
-//       primaryText: "Create and visualize like a pro",
-//     },
-//   ];
-
-//   return (
-//     <div className={styles.root}>
-//       <Header logo="assets/logo-filled.png" title={props.title} message="Welcome" />
-//       <HeroList message="Discover what this add-in can do for you today!" items={listItems} />
-//       <TextInsertion />
-//     </div>
-//   );
-// };
-
-// export default App;

@@ -23,6 +23,9 @@ module.exports = async (env, options) => {
       vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
       taskpane: ["react-hot-loader/patch", "./src/taskpane/index.tsx", "./src/taskpane/taskpane.html"],
       commands: "./src/commands/commands.ts",
+      // polyfillStyle: ["core-js/stable", "regenerator-runtime/runtime"],
+      // vendorStyle: ["react", "react-dom", "core-js", "@fluentui/react"],
+      changeStyle: ["react-hot-loader/patch", "./src/taskpane/style.tsx", "./src/taskpane/changeStyle.html"],
     },
     output: {
       clean: true,
@@ -91,6 +94,11 @@ module.exports = async (env, options) => {
         filename: "commands.html",
         template: "./src/commands/commands.html",
         chunks: ["commands"],
+      }),
+      new HtmlWebpackPlugin({
+        filename: "changeStyle.html",
+        template: "./src/taskpane/changeStyle.html",
+        chunks: ["polyfill", "vendor", "changeStyle"],
       }),
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"],

@@ -12,6 +12,9 @@
     "axios": "^1.6.8",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "gigachat-node": "^2.1.2",
+    "node-localstorage": "^3.0.5",
+    "serverless-http": "^3.2.0",
     "uuid": "^9.0.1"
   }
 }

@@ -57,6 +57,146 @@
               </Group>
             </OfficeTab>
           </ExtensionPoint>
+          <ExtensionPoint xsi:type="ContextMenu">
+            <OfficeMenu id="ContextMenuText">
+              <Control xsi:type="Menu" id="Contoso.myMenu">
+                <Label resid="ContextMenu.Label" />
+                <Supertip>
+                  <Title resid="ContextMenu.Label" />
+                  <Description resid="ContextMenu.Tooltip" />
+                </Supertip>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
+                <Items>
+                  <Item id="myMenuItemID">
+                    <Label resid="ContextMenu.Item.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item.Label" />
+                      <Description resid="ContextMenu.Item.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>ButtonId1</TaskpaneId>
+                      <SourceLocation resid="Taskpane.Url" />
+                    </Action>
+                  </Item>
+                  <Item id="MakeTextEasy">
+                    <Label resid="ContextMenu.Item2.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item2.Label" />
+                      <Description resid="ContextMenu.Item2.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>MakeTextEasy</FunctionName>
+                    </Action>
+                  </Item>
+                  <Item id="FinishText">
+                    <Label resid="ContextMenu.Item3.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item3.Label" />
+                      <Description resid="ContextMenu.Item3.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>FinishText</FunctionName>
+                    </Action>
+                  </Item>
+                  <Item id="FixText">
+                    <Label resid="ContextMenu.Item4.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item4.Label" />
+                      <Description resid="ContextMenu.Item4.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>FixText</FunctionName>
+                    </Action>
+                  </Item>
+                  <Item id="MainThemesText">
+                    <Label resid="ContextMenu.Item5.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item5.Label" />
+                      <Description resid="ContextMenu.Item5.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>MainThemesText</FunctionName>
+                    </Action>
+                  </Item>
+                  <Item id="ChangeStyleText">
+                    <Label resid="ContextMenu.Item6.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item6.Label" />
+                      <Description resid="ContextMenu.Item6.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>MyTaskpaneId2</TaskpaneId>
+                      <SourceLocation resid="Taskpane2.Url" />
+                    </Action>
+                  </Item>
+                  <Item id="ExplanationText">
+                    <Label resid="ContextMenu.Item7.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item7.Label" />
+                      <Description resid="ContextMenu.Item7.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>ExplanationText</FunctionName>
+                    </Action>
+                  </Item>
+                  <Item id="ToOptionsText">
+                    <Label resid="ContextMenu.Item8.Label"/>
+                    <Supertip>
+                      <Title resid="ContextMenu.Item8.Label" />
+                      <Description resid="ContextMenu.Item8.Tooltip" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16" />
+                      <bt:Image size="32" resid="Icon.32x32" />
+                      <bt:Image size="80" resid="Icon.80x80" />
+                    </Icon>
+                    <Action xsi:type="ExecuteFunction">
+                      <FunctionName>toOptionsText</FunctionName>
+                    </Action>
+                  </Item>
+                </Items>
+              </Control>
+            </OfficeMenu>
+          </ExtensionPoint>
         </DesktopFormFactor>
       </Host>
     </Hosts>
@@ -70,15 +210,34 @@
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+        <bt:Url id="Taskpane2.Url" DefaultValue="https://localhost:3000/changeStyle.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Начни работу с GigaNote!"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="GigaNote"/>
+        <bt:String id="ContextMenu.Label" DefaultValue="GigaNote" />
+        <bt:String id="ContextMenu.Item.Label" DefaultValue="GigaNote" />
+        <bt:String id="ContextMenu.Item2.Label" DefaultValue="Упростить текст" />
+        <bt:String id="ContextMenu.Item3.Label" DefaultValue="Продолжить текст" />
+        <bt:String id="ContextMenu.Item4.Label" DefaultValue="Исправить текст" />
+        <bt:String id="ContextMenu.Item5.Label" DefaultValue="Выделить главное" />
+        <bt:String id="ContextMenu.Item6.Label" DefaultValue="Изменить стиль" />
+        <bt:String id="ContextMenu.Item7.Label" DefaultValue="Дать определение" />
+        <bt:String id="ContextMenu.Item8.Label" DefaultValue="Подобрать оглавление" />
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+        <bt:String id="GetStarted.Description" DefaultValue="Чтобы начать использовать GigaNote, пожалуйста, вставьте свой токен доступа к GigaChat."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Нажми, чтобы открыть надстройку"/>
+        <bt:String id="ContextMenu.Tooltip" DefaultValue="Нажми, чтобы открыть надстройку" />
+        <bt:String id="ContextMenu.Item.Tooltip" DefaultValue="Нажми, чтобы открыть надстройку" />
+        <bt:String id="ContextMenu.Item2.Tooltip" DefaultValue="Нажми, чтобы упростить текст" />
+        <bt:String id="ContextMenu.Item3.Tooltip" DefaultValue="Нажми, чтобы продолжить текст" />
+        <bt:String id="ContextMenu.Item4.Tooltip" DefaultValue="Нажми, чтобы исправить текст" />
+        <bt:String id="ContextMenu.Item5.Tooltip" DefaultValue="Нажми, чтобы выделить из текста главное" />
+        <bt:String id="ContextMenu.Item6.Tooltip" DefaultValue="Нажми, чтобы изменить стиль текста" />
+        <bt:String id="ContextMenu.Item7.Tooltip" DefaultValue="Нажми, чтобы получить определение слова" />
+        <bt:String id="ContextMenu.Item8.Tooltip" DefaultValue="Нажми, чтобы подобрать к тексту оглавление" />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
