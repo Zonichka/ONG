@@ -1,7 +1,8 @@
 const express = require("express");
 const router = require("./router");
 const cors = require("cors");
-const PORT = 5000;
+const dotenv = require("dotenv").config();
+const PORT = dotenv.parsed.PORT || 8080;
 
 const app = express();
 // const serverless = require('serverless-http');
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://localhost:3000",
+    origin: `${dotenv.parsed.FRONT}`,
   }),
 );
 

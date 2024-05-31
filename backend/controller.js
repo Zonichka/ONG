@@ -1,36 +1,17 @@
 const GigaChat = require('gigachat-node').GigaChat;
+const dotenv = require("dotenv").config();
 
 class controller {
   constructor() {
     this.apiKey = null;
     this.client = null;
-    this.MAKE_EASY_PROMPT = `Ты - система, которая упрощает текст.
-    Ты должна улучшить читабельность и понятность текста.
-    Если не можешь изменить текст, ты должна вернуть тот же текст.
-    Вот текст: `;
-    this.FINISH_PROMPT = `Ты система продолжения текста. Система продолжения текста работает следующим образом: когда ей 
-    предоставляется начальный текст, она анализирует его стилистику и контекст, а затем генерирует 
-    продолжение текста в том же стиле и с учетом данного контекста. Ответ системы всегда содержит только 
-    продолжение текста, без дополнительных комментариев или информации. \nПродолжи текст: `;
-    this.FIX_PROMPT = `Ты система исправления ошибок в тексте.
-    Ты умеешь только исправить текст, ничего больше. 
-    Если не можешь найти ошибки, ты должна вернуть тот же текст.
-    Не добавляй знак " в начале и в конце текста, если их не было.
-    Исправь грамматические и пунктуационные ошибки, в тексте: `;
-    this.MAIN_THEMES_PROMPT = `Ты - система выявление основных идей текста.
-    Когда тебе приходит текст, ты находишь главные идеи текста.
-    В своем ответе ты пишешь только идеи, которые нашла. Больше ничего.
-    Какие основные идеи в тексте: `;
-    this.EXPLANATIONS_PROMPT = `Ты - система, которая объясняет текст и термины в нем.
-    Пиши только объяснения текста. Ничего больше.
-    Вот текст:  `;
-    this.TO_OPTIONS_OF_CONTENT_PROMPT = `Ты - система подбора оглавления.
-    Тебе приходит текст и ты подбираешь 3 наиболее подходящих вариантов оглавления к тексту
-    Вот текст:   `;
-    this.CHANGE_STYLE_PROMPT = `Ты - система, которая пишет текст только в стиле: {style}.
-    Когда тебе приходит текст, ты пытаешься переписать его в этом стиле.
-    Если не можешь поменять стиль текста, ты должна вернуть тот же текст.
-    Перепиши текст в стиле {style}: `;
+    this.MAKE_EASY_PROMPT = dotenv.parsed.MAKE_EASY_PROMPT;
+    this.FINISH_PROMPT = dotenv.parsed.FINISH_PROMPT;
+    this.FIX_PROMPT = dotenv.parsed.FIX_PROMPT;
+    this.MAIN_THEMES_PROMPT = dotenv.parsed.MAIN_THEMES_PROMPT;
+    this.EXPLANATIONS_PROMPT = dotenv.parsed.EXPLANATIONS_PROMPT;
+    this.TO_OPTIONS_OF_CONTENT_PROMPT = dotenv.parsed.TO_OPTIONS_OF_CONTENT_PROMPT;
+    this.CHANGE_STYLE_PROMPT = dotenv.parsed.CHANGE_STYLE_PROMPT;
   }
 
   createGigaChat(apiKey) {
@@ -57,9 +38,7 @@ class controller {
     try {
       const { apiKey } = req.body;
       this.saveApiKey(apiKey);
-      console.log(this.apiKey);
       const client = this.getOrCreateClient();
-      console.log(client);
       await client.createToken();
       res.status(200).json({ access_token: client.authorization });
     } catch (error) {
@@ -76,7 +55,6 @@ class controller {
       const { prompt } = req.body;
 
       const client = this.getOrCreateClient();
-      console.log(client);
       const response = await client.completion({
         "model": "GigaChat:latest",
         "messages": [
@@ -101,6 +79,11 @@ class controller {
   async processText(req, res, prompt, content, maxTokens, temperature) {
     try {
       const client = this.getOrCreateClient();
+      console.log(client);
+      console.log(prompt);
+      console.log(content);
+      console.log(maxTokens);
+      console.log(temperature);
       const response = await client.completion({
         "model": "GigaChat:latest",
         "messages": [

@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 import axios from "axios";
+// const dotenv = require("dotenv").config({ path: './../../.env' });
+// const URL_BACK = `${process.env.BACK}`
 // import App from "../taskpane/components/App";
 
 /* global Office */
@@ -42,7 +44,6 @@ async function handleAction(event: Office.AddinCommands.Event, endpointModifier)
         console.log(error.message);
       } else {
         const prompt = asyncResult.value;
-        console.log(prompt);
         const response = await mainApi.postData(endpointModifier, prompt);
         if (endpointModifier === "finish") {
           Office.context.document.setSelectedDataAsync(prompt + ' ' + response.data.prompt, { coercionType: Office.CoercionType.Text });

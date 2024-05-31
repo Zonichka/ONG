@@ -5,8 +5,9 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const dotenv = require("dotenv").config();
 
-const urlDev = "https://localhost:3000/";
+const urlDev = `${process.env.FRONT}`;
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
 
 async function getHttpsOptions() {
@@ -23,8 +24,6 @@ module.exports = async (env, options) => {
       vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
       taskpane: ["react-hot-loader/patch", "./src/taskpane/index.tsx", "./src/taskpane/taskpane.html"],
       commands: "./src/commands/commands.ts",
-      // polyfillStyle: ["core-js/stable", "regenerator-runtime/runtime"],
-      // vendorStyle: ["react", "react-dom", "core-js", "@fluentui/react"],
       changeStyle: ["react-hot-loader/patch", "./src/taskpane/style.tsx", "./src/taskpane/changeStyle.html"],
     },
     output: {
@@ -116,7 +115,7 @@ module.exports = async (env, options) => {
       port: process.env.npm_package_config_dev_server_port || 3000,
       proxy: {
         '^/*': {
-          target: 'http://localhost:5000',
+          target: process.env.BACK,
           secure: false
         }
       }

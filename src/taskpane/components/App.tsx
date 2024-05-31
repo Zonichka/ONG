@@ -4,6 +4,7 @@ import Center from "./Center";
 import Container from "./Container";
 import Login from "./Login";
 import axios from "axios";
+// const dotenv = require("dotenv").config({ path: './../../../.env' });
 /* global OneNote console */
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
   const [error, setError] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
   const [generatedText, setGeneratedText] = React.useState<string>("");
+  // const URL_BACK = `${process.env.BACK}`
 
   const $api = axios.create({
     baseURL:

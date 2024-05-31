@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@azure/msal-node": "^2.9.0",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "gigachat-node": "^2.1.2",
     "node-localstorage": "^3.0.5",
